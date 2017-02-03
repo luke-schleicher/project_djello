@@ -5,7 +5,9 @@ dj.directive('headerLinks', function() {
     restrict: 'E',
     scope: {
       boards: '=',
-      createDefaultBoard: '&'
+      currentBoard: '=',
+      createDefaultBoard: '&',
+      deleteBoard: '&'
     }
   };
 

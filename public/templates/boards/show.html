@@ -1,5 +1,13 @@
-{{ currentBoard.title }}
+<div class="row">
+  <div class="col-sm-9">
+    <h1>{{ currentBoard.title }}</h1>
+  </div>
 
-<header-links boards="boards" create-default-board="createDefaultBoard()"></header-links>
+  <div class="col-sm-3">
+    <header-links boards="boards" current-board="currentBoard" create-default-board="createDefaultBoard()" delete-board="deleteBoard()"></header-links>
+  </div>
+</div>
 
-this is the show state
+<div class="row">
+  {{ currentBoard }}
+</div>

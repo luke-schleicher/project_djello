@@ -1,13 +1,11 @@
-<div class="pull-right">
-  <label>Select Board:
-    <select>
-      <option ng-repeat="board in boards">{{ board.title }}
-      </option>
-    </select>
-  </label>
+<label>Select Board:
+  <select>
+    <option ng-repeat="board in boards">{{ board.title }}
+    </option>
+  </select>
+</label>
 
-  <div>
-    <a>Delete Board</a>
-    <a ng-click="createDefaultBoard()">New Board</a>
-  </div>
+<div>
+  <a ng-click="deleteBoard()" ng-if="currentBoard.id">Delete Board</a>
+  <a ng-click="createDefaultBoard()">New Board</a>
 </div>
