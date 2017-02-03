@@ -11,7 +11,7 @@ dj.config(["$httpProvider", "$stateProvider", "$urlRouterProvider", 'Restangular
     'content-type': 'application/json'
   })
 
-  $urlRouterProvider.otherwise('/');
+  $urlRouterProvider.otherwise('/boards');
 
   $stateProvider
 
@@ -20,10 +20,6 @@ dj.config(["$httpProvider", "$stateProvider", "$urlRouterProvider", 'Restangular
       views: {
         'nav': {
           templateUrl: 'templates/nav.html'
-        },
-        'boards-header': {
-          templateUrl: 'templates/header.html',
-          controller: 'BoardsCtrl'
         },
         'main': {
           templateUrl: 'templates/main.html'
@@ -35,20 +31,32 @@ dj.config(["$httpProvider", "$stateProvider", "$urlRouterProvider", 'Restangular
         }
       }
     })
-
     .state('dashboard.boards', {
+      url: 'boards',
+      views: {
+        'boards-header': {
+          templateUrl: 'templates/boards/header.html',
+          controller: 'BoardsCtrl'
+        },
+        'board@dashboard': {
+          template: '<div class="text-center text-muted">Create or select a board.</div<',
+          controller: 'BoardsCtrl'
+        }
+      },
+    })
+    .state('dashboard.boards.show', {
       url: 'boards/:id',
       views: {
+        'boards-header': {
+          templateUrl: 'templates/boards/header.html',
+          controller: 'BoardsCtrl'
+        },
         'board@dashboard': {
           templateUrl: 'templates/boards/show.html',
           controller: 'BoardsCtrl'
         }
       },
-      resolve: {
-        getBoard: function() {
-          return boardService.getBoard($stateParams.id);
-        }
-      }
+
     });
 
 }]);
