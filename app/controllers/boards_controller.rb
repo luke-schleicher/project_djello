@@ -1,7 +1,8 @@
 class BoardsController < ApplicationController
 
   def create
-    if @board.create(whitelist)
+    @board = Board.new(whitelist)
+    if @board.save
       respond_to do |format|
         format.json { render json: @board }
       end
@@ -10,6 +11,12 @@ class BoardsController < ApplicationController
         format.json { render json: @board.errors.full_messages }
       end
     end
+  end
+
+  private
+
+  def whitelist
+    params.require(:board).permit(:title, :user_id)
   end
 
 end

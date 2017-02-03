@@ -4,17 +4,17 @@ dj.factory('userService',
 
       var currentUser;
 
-      Auth.currentUser().then(
-        function(user) {
-          currentUser = user;
-        }, function(response) {
-          console.log(response);
-        }
-      );
-
-
       var getCurrentUser = function getCurrentUser() {
-        return currentUser;
+        return Auth.currentUser().then(
+          function(user) {
+            console.log('user', user);
+            currentUser = user;
+            return currentUser;
+          }, function(response) {
+            console.log(response);
+            return currentUser;
+          }
+        );
       };
 
       return {

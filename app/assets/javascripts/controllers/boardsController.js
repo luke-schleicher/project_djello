@@ -1,10 +1,14 @@
 dj.controller('BoardsCtrl',
-  ['boardService',
-    function(boardService) {
+  [ '$scope', '$state', 'boardService', 'user',
+    function($scope, $state, boardService, user) {
 
-      var createDefaultBoard = function createDefaultBoard() {
+      $scope.currentUser = user;
+
+      $scope.createDefaultBoard = function createDefaultBoard() {
         console.log('ran');
-        boardService.create($scope.board);
+        boardService.create($scope.board, $scope.currentUser).then(function(board) {
+          $state.go('boards', { id: board.id });
+        });
       };
 
     }

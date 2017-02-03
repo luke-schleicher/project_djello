@@ -1,20 +1,22 @@
 dj.factory('boardService',
-  ['Restangular', 'userService',
-    function(Restangular, userService) {
+  ['Restangular',
+    function(Restangular) {
 
-      var _currentUser = userService.getCurrentUser();
+    var _boards = [];
 
-      var createBoard = function createBoard(boardFormData) {
+      var createBoard = function createBoard(boardFormData, user) {
         var newBoard = {
           board: {
             title: 'Add board title...',
-            user_id: _currentUser.id
+            user_id: user.id
           }
         };
 
-        Restangular.all('boards').post(newBoard);
+        Restangular.all('boards').post(newBoard).then(function(board){
+          _boards.push(board);
+          return board;
+        });
 
-        // $state.go('boards', id);
       };
 
       return {

@@ -28,8 +28,14 @@ dj.config(["$httpProvider", "$stateProvider", "$urlRouterProvider", 'Restangular
         'main': {
           templateUrl: 'templates/main.html'
         }
+      },
+      resolve: {
+        user: function(userService) {
+          return userService.getCurrentUser();
+        }
       }
     })
+
     .state('boards', {
       url: 'boards/:id',
       views: {
