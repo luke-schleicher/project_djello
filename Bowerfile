@@ -1,0 +1,4 @@
+asset "angular"
+asset "lodash"
+asset "ui-router"
+asset "restangular"
