@@ -4,15 +4,11 @@ dj.controller('BoardsCtrl',
 
       $scope.currentUser = user;
       $scope.currentBoard = boardService.getBoard($stateParams.id);
-
-      var func = function() {
-        console.log('hey i ran');
-      }
-      func();
       
       $scope.createDefaultBoard = function createDefaultBoard() {
+        console.log('creating board');
         boardService.create($scope.board, $scope.currentUser).then(function(board) {
-          $state.go('dashboard.boards.show', { id: board.id });
+          $state.go('boards.show', { id: board.id });
         });
       };
 
