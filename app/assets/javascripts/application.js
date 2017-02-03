@@ -15,6 +15,7 @@
 //= require bootstrap-sprockets
 //= require angular/angular
 //= require lodash/lodash
+//= require angular-devise
 //= require restangular/dist/restangular
 //= require ui-router/release/angular-ui-router
 //= require_tree .
