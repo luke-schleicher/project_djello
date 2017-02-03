@@ -43,6 +43,11 @@ dj.config(["$httpProvider", "$stateProvider", "$urlRouterProvider", 'Restangular
           templateUrl: 'templates/boards/show.html',
           controller: 'BoardsCtrl'
         }
+      },
+      resolve: {
+        getBoard: function() {
+          return boardService.getBoard($stateParams.id);
+        }
       }
     });
 

@@ -2,9 +2,8 @@ dj.controller('BoardsCtrl',
   [ '$scope', '$state', '$stateParams', 'boardService', 'user',
     function($scope, $state, $stateParams, boardService, user) {
 
+      $scope.boardService = boardService;
       $scope.currentUser = user;
-      $scope.currentBoard = boardService.getBoard($stateParams.id);
-      console.log($scope.currentBoard);
 
       $scope.createDefaultBoard = function createDefaultBoard() {
         boardService.create($scope.board, $scope.currentUser).then(function(board) {
@@ -15,3 +14,6 @@ dj.controller('BoardsCtrl',
     }
   ]
 );
+
+
+// Use broadcast or emit

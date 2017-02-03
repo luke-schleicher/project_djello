@@ -2,7 +2,8 @@ dj.factory('boardService',
   ['Restangular',
     function(Restangular) {
 
-    var _boards = [];
+      var _boards = [];
+      var currentBoard = {};
 
       var createBoard = function createBoard(boardFormData, user) {
         var newBoard = {
@@ -20,12 +21,16 @@ dj.factory('boardService',
       };
 
       var getBoard = function getBoard(id) {
-        return Restangular.one('boards', id).get().$object;
+        return Restangular.one('boards', id).get().then(function(board) {
+          currentBoard.board = board;
+          return board;
+        });
       };
 
       return {
         create: createBoard,
-        getBoard: getBoard
+        getBoard: getBoard,
+        currentBoard: currentBoard
       };
     }
   ]

@@ -32,7 +32,7 @@ Cards
   - description
   - priority/order: int?
   - list id (repeated data?)
-  - completion status
+  - completed_at (date)
 - x:x members
 - activity log (email)
 - clickable in modal
