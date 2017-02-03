@@ -9,5 +9,35 @@ dj.config(["$httpProvider", "$stateProvider", "$urlRouterProvider", 'Restangular
   RestangularProvider.setRequestSuffix('.json');
   RestangularProvider.setDefaultHttpFields({
     'content-type': 'application/json'
-  });
+  })
+
+  $urlRouterProvider.otherwise('/');
+
+  $stateProvider
+
+    .state('dashboard', {
+      url: '/',
+      views: {
+        'nav': {
+          templateUrl: 'templates/nav.html'
+        },
+        'boards-header': {
+          templateUrl: 'templates/header.html'
+        },
+        'main': {
+          templateUrl: 'templates/main.html'
+        }
+      }
+    })
+
+    .state('boards', {
+      url: 'boards',
+      views: {
+        'board@boards': {
+          templateUrl: 'templates/boards/show.html'
+        }
+      }
+    })
+
 }]);
+
