@@ -36,11 +36,12 @@ dj.config(["$httpProvider", "$stateProvider", "$urlRouterProvider", 'Restangular
       }
     })
 
-    .state('boards', {
+    .state('dashboard.boards', {
       url: 'boards/:id',
       views: {
-        'board@boards': {
-          templateUrl: 'templates/boards/show.html'
+        'board@dashboard': {
+          templateUrl: 'templates/boards/show.html',
+          controller: 'BoardsCtrl'
         }
       }
     });

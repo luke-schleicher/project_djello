@@ -13,10 +13,22 @@ class BoardsController < ApplicationController
     end
   end
 
+  def show
+    @board = Board.find_by(id: params[:id])
+    respond_to do |format|
+      format.json { render json: @board }
+    end
+  end
+
+  def index
+
+    # @boards = Board.all.where(current user)
+  end
+
   private
 
-  def whitelist
-    params.require(:board).permit(:title, :user_id)
-  end
+    def whitelist
+      params.require(:board).permit(:title, :user_id)
+    end
 
 end

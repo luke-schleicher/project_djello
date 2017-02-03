@@ -12,15 +12,20 @@ dj.factory('boardService',
           }
         };
 
-        Restangular.all('boards').post(newBoard).then(function(board){
+        return Restangular.all('boards').post(newBoard).then(function(board){
           _boards.push(board);
           return board;
         });
 
       };
 
+      var getBoard = function getBoard(id) {
+        return Restangular.one('boards', id).get().$object;
+      };
+
       return {
-        create: createBoard
+        create: createBoard,
+        getBoard: getBoard
       };
     }
   ]
