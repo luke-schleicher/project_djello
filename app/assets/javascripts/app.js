@@ -22,22 +22,21 @@ dj.config(["$httpProvider", "$stateProvider", "$urlRouterProvider", 'Restangular
           templateUrl: 'templates/nav.html'
         },
         'boards-header': {
-          templateUrl: 'templates/header.html'
+          templateUrl: 'templates/header.html',
+          controller: 'BoardsCtrl'
         },
         'main': {
           templateUrl: 'templates/main.html'
         }
       }
     })
-
     .state('boards', {
-      url: 'boards',
+      url: 'boards/:id',
       views: {
         'board@boards': {
           templateUrl: 'templates/boards/show.html'
         }
       }
-    })
+    });
 
 }]);
-
