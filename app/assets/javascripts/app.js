@@ -31,6 +31,7 @@ dj.config(["$httpProvider", "$stateProvider", "$urlRouterProvider", 'Restangular
         }
       }
     })
+
     .state('dashboard.boards', {
       url: 'boards',
       views: {
@@ -44,10 +45,11 @@ dj.config(["$httpProvider", "$stateProvider", "$urlRouterProvider", 'Restangular
         }
       },
     })
+
     .state('dashboard.boards.show', {
-      url: 'boards/:id',
+      url: '/:id',
       views: {
-        'boards-header': {
+        'boards-header@dashboard': {
           templateUrl: 'templates/boards/header.html',
           controller: 'BoardsCtrl'
         },
@@ -56,7 +58,6 @@ dj.config(["$httpProvider", "$stateProvider", "$urlRouterProvider", 'Restangular
           controller: 'BoardsCtrl'
         }
       },
-
     });
 
 }]);
