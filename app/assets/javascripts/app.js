@@ -28,7 +28,7 @@ dj.config(["$httpProvider", "$stateProvider", "$urlRouterProvider", 'Restangular
       resolve: {
         user: function(userService) {
           return userService.getCurrentUser();
-        },
+         },
         boards: function(boardService) {
           return boardService.all();
         }

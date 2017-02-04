@@ -8,7 +8,7 @@ dj.factory('boardService',
         return Restangular.all('boards').getList().then(
           function(boards) {
             _boards = boards;
-            return _boards;
+            return boards;
           }
         );
       };
@@ -47,7 +47,8 @@ dj.factory('boardService',
       return {
         create: createBoard,
         getBoard: getBoard,
-        deleteBoard: deleteBoard
+        deleteBoard: deleteBoard,
+        all: all
       };
     }
   ]

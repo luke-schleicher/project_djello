@@ -41,7 +41,8 @@ class BoardsController < ApplicationController
   end
 
   def index
-    @boards = Board.all.where(user_id: current_user.id)
+    @boards = current_user.boards
+  #   @boards = Board.all.where(user_id: current_user.id)
     respond_to do |format|
       format.json { render json: @boards }
     end
