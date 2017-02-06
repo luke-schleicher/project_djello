@@ -28,24 +28,33 @@ dj.config(["$httpProvider", "$stateProvider", "$urlRouterProvider", 'Restangular
       resolve: {
         user: function(userService) {
           return userService.getCurrentUser();
-         },
-        boards: function(boardService) {
-          return boardService.all();
         }
       }
     })
 
     .state('boards.index', {
       url: 'boards',
-      // move controller to parent state
-      controller: 'BoardsCtrl',
-      templateUrl: 'templates/boards/index.html'
+      controller: 'BoardsIndexCtrl',
+      templateUrl: 'templates/boards/index.html',
+      resolve: {
+        boards: function(boardService) {
+          return boardService.all();
+        }
+      }
     })
 
     .state('boards.show', {
       url: 'boards/:id',
-      controller: 'BoardsCtrl',
-      templateUrl: 'templates/boards/show.html'
+      controller: 'BoardsShowCtrl',
+      templateUrl: 'templates/boards/show.html',
+      resolve: {
+        currentBoard: function(boardService, $stateParams) {
+          return boardService.setCurrentBoard($stateParams.id);
+        },
+        boards: function(boardService) {
+          return boardService.all();
+        }
+      }
     });
 
 }]);

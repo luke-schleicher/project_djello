@@ -1,13 +1,13 @@
 <div class="row">
   <div class="col-sm-9">
-    <h1>{{ currentBoard.title }}</h1>
+    <h1 id="board-title" ng-if="!editingTitle" ng-click="editTitle()">{{ currentBoard.title }}</h1>
+    <input type="text" ng-if="editingTitle" id="new-title" placeholder="Enter new title...">
+    <input type="submit" ng-if="editingTitle" ng-click="updateTitle()" value="Update Title">
   </div>
 
   <div class="col-sm-3">
-    <header-links boards="boards" current-board="currentBoard" create-default-board="createDefaultBoard()" delete-board="deleteBoard()"></header-links>
+    <header-links boards="boards" current-board="currentBoard" chosen-board="chosenBoard" create-default-board="createDefaultBoard()" delete-board="deleteBoard()" choose-board="chooseBoard(board)"></header-links>
   </div>
 </div>
 
-<div class="row">
-  {{ currentBoard }}
-</div>
+{{ currentBoard }}

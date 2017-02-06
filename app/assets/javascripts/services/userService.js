@@ -4,7 +4,7 @@ dj.factory('userService',
 
       var currentUser;
 
-      var getCurrentUser = function getCurrentUser() {
+      var getCurrentUser = function() {
         return Auth.currentUser().then(
           function(user) {
             currentUser = user;

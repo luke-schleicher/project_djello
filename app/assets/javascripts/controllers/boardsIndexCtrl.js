@@ -1,22 +1,29 @@
-dj.controller('BoardsCtrl',
+dj.controller('BoardsIndexCtrl',
   [ '$scope', '$state', '$stateParams', 'boardService', 'user', 'boards',
     function($scope, $state, $stateParams, boardService, user, boards) {
 
       $scope.currentUser = user;
-      $scope.currentBoard = boardService.getBoard($stateParams.id);
       $scope.boards = boards;
 
-      $scope.createDefaultBoard = function createDefaultBoard() {
+      $scope.createDefaultBoard = function() {
         boardService.create($scope.board, $scope.currentUser).then(function(board) {
           $state.go('boards.show', { id: board.id });
         });
       };
 
-      $scope.deleteBoard = function deleteBoard() {
-        boardService.deleteBoard($scope.currentBoard).then( function() {
+      $scope.deleteBoard = function() {
+        boardService.deleteBoard($scope.currentBoard).then(function() {
           $state.go('boards.index');
         });
       };
+
+      $scope.chooseBoard = function(id) {
+        var boardId = parseInt(id);
+        boardService.setCurrentBoard(boardId).then(function(board) {
+          $state.go('boards.show', { id: board.id });
+        });
+      };
+
     }
   ]
 );

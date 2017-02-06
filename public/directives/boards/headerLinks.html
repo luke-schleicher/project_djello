@@ -1,9 +1,10 @@
 <label>Select Board:
-  <select>
-    <option ng-repeat="board in boards" value="{{ board.id }}">{{ board.title }}
-    </option>
+  <select ng-change="chooseBoard({ board: chosenBoard.id })" ng-model="chosenBoard.id">
+    <option ng-repeat="board in boards" value="{{ board.id }}">{{ board.title }}</option>
   </select>
 </label>
+
+{{ chosenBoard }}
 
 <div>
   <a ng-click="deleteBoard()" ng-if="currentBoard.id">Delete Board</a>

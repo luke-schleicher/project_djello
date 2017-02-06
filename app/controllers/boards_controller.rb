@@ -1,15 +1,9 @@
 class BoardsController < ApplicationController
 
-  def create
-    @board = Board.new(whitelist)
-    if @board.save
-      respond_to do |format|
-        format.json { render json: @board }
-      end
-    else
-      respond_to do |format|
-        format.json { render json: @board.errors.full_messages }
-      end
+  def index
+    @boards = current_user.boards
+    respond_to do |format|
+      format.json { render json: @boards }
     end
   end
 
@@ -27,6 +21,32 @@ class BoardsController < ApplicationController
     end
   end
 
+  def create
+    @board = Board.new(whitelist_create)
+    if @board.save
+      respond_to do |format|
+        format.json { render json: @board }
+      end
+    else
+      respond_to do |format|
+        format.json { render json: @board.errors.full_messages }
+      end
+    end
+  end
+
+  def update
+    @board = Board.find_by(id: params[:id])
+    if @board.update(whitelist_update)
+      respond_to do |format|
+        format.json { render json: @board }
+      end
+    else
+      respond_to do |format|
+        format.json { render json: @board.errors.full_messages }
+      end
+    end
+  end
+
   def destroy
     @board = Board.find_by(id: params[:id])
     if @board.destroy
@@ -40,18 +60,15 @@ class BoardsController < ApplicationController
     end
   end
 
-  def index
-    @boards = current_user.boards
-  #   @boards = Board.all.where(user_id: current_user.id)
-    respond_to do |format|
-      format.json { render json: @boards }
-    end
-  end
 
   private
 
-    def whitelist
+    def whitelist_create
       params.require(:board).permit(:title, :user_id)
+    end
+
+    def whitelist_update
+      params.require(:board).permit(:id, :title, :user_id, :created_at, :updated_at)
     end
 
 end

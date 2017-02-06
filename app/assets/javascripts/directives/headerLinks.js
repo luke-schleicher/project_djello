@@ -6,8 +6,10 @@ dj.directive('headerLinks', function() {
     scope: {
       boards: '=',
       currentBoard: '=',
+      chosenBoard: '=',
       createDefaultBoard: '&',
-      deleteBoard: '&'
+      deleteBoard: '&',
+      chooseBoard: '&'
     }
   };
 
