@@ -3,7 +3,6 @@ dj.factory('boardService',
     function(Restangular) {
 
       var _boards = [];
-      var _currentBoard;
 
       var all = function() {
         return Restangular.all('boards').getList().then(
@@ -33,21 +32,16 @@ dj.factory('boardService',
 
       };
 
-      var setCurrentBoard = function(id) {
+      var getCurrentBoard = function(id) {
         return Restangular.one('boards', id).get().then(function(board){
-          _currentBoard = board;
           return board;          
         }, function(response) {
           console.log(response);
         });        
       };
 
-      var getCurrentBoard = function(id) {
-        return _currentBoard;
-      };
-
-      var deleteBoard = function(board) {
-        return board.remove().then(function(board) {
+      var deleteBoard = function(id) {
+        return Restangular.one('boards', id).remove().then(function(board) {
           for (var i = 0; i < _boards.length; i++) {
             if (board.id === _boards[i].id) {
               _boards.splice(i, 1);
@@ -59,18 +53,13 @@ dj.factory('boardService',
 
       var update = function(board) {
         return board.put().then(function(board) {
-
-          _currentBoard = board;
-
           for (var i = 0; i < _boards.length; i++) {
             if (board.id === _boards[i].id) {
               _boards[i].title = board.title;
               break;
             }
           }
-
           return board;
-
         })
       };
 
@@ -79,7 +68,6 @@ dj.factory('boardService',
         all: all,
         getBoards: getBoards,
         create: createBoard,
-        setCurrentBoard: setCurrentBoard,
         getCurrentBoard: getCurrentBoard,
         deleteBoard: deleteBoard,
         update: update

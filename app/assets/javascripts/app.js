@@ -48,11 +48,16 @@ dj.config(["$httpProvider", "$stateProvider", "$urlRouterProvider", 'Restangular
       controller: 'BoardsShowCtrl',
       templateUrl: 'templates/boards/show.html',
       resolve: {
-        currentBoard: function(boardService, $stateParams) {
-          return boardService.setCurrentBoard($stateParams.id);
-        },
         boards: function(boardService) {
           return boardService.all();
+        },
+        currentBoard: function($stateParams, boards) {
+          console.log('boards', boards);
+          for (var i = 0; i < boards.length; i++) {
+            if (boards[i].id === Number($stateParams.id)) {
+              return boards[i];
+            }
+          }
         }
       }
     });

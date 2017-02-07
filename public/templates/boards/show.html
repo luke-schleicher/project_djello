@@ -22,8 +22,14 @@
         <input ng-show="editingDesc[list.id]" type="text" id="new-list-desc-{{ list.id }}" ng-blur="updateListDesc(list)">
 
       </div>
-      <div class="panel-body">
-        <p><a ng-click="addCard()">Add a Card</a></p>
+      <div class="panel-body" ng-controller="CardsIndexCtrl">
+
+        <div ng-repeat="card in list.cards track by $index">
+          <h4>{{ card.title }}</h4>
+          <p>{{ card.description }}</p>
+        </div>
+
+        <p><a ng-click="addCard(list)">Add a Card</a></p>
       </div>
       <div class="panel-footer">
         <p><a ng-click="deleteList(list)">Delete List</a></p>

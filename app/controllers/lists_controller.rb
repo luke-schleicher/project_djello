@@ -21,7 +21,7 @@ class ListsController < ApplicationController
     @list = @board.lists.find(params[:list][:id])
     if @list.update(whitelisted_update)
       respond_to do |format|
-        format.json { render json: @list }
+        format.json { render json: @list.to_json( include: :cards) }
       end
     else
       respond_to do |format|

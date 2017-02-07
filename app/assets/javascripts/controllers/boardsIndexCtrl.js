@@ -12,16 +12,14 @@ dj.controller('BoardsIndexCtrl',
       };
 
       $scope.deleteBoard = function() {
-        boardService.deleteBoard($scope.currentBoard).then(function() {
+        boardService.deleteBoard($scope.chosenBoard.id).then(function() {
           $state.go('boards.index');
         });
       };
 
       $scope.chooseBoard = function(id) {
         var boardId = parseInt(id);
-        boardService.setCurrentBoard(boardId).then(function(board) {
-          $state.go('boards.show', { id: board.id });
-        });
+        $state.go('boards.show', { id: boardId });
       };
 
     }
