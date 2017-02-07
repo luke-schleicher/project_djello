@@ -44,6 +44,11 @@ dj.controller('ListsIndexCtrl',
       };
 
       $scope.updateListDesc = function(list) {
+        var desc = angular.element('#new-list-desc-' + list.id).val();
+        if (desc.length) {
+          list.description = desc;
+          listService.update(list);
+        }
         $scope.editingDesc = {};
       };
 
@@ -52,6 +57,7 @@ dj.controller('ListsIndexCtrl',
           for (var i = 0; i < $scope.currentBoard.lists.length; i++) {
             if ($scope.currentBoard.lists[i].id === list.id) {
               $scope.currentBoard.lists.splice(i, 1);
+              break;
             }
           }
         });
