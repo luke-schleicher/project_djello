@@ -1,24 +1,35 @@
-<div class="modal fade" id="card-modal-{{ card.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="card-modal-{{ card.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" ng-controller="CardsShowCtrl">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
+
       <div class="modal-header">
+
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-        <h3 class="modal-title" id="exampleModalLabel">{{ card.title }}</h3>
+
+        <h3 ng-show="!editingTitle" ng-click="editCardTitle(card.id)"class="modal-title" id="card-title-{{ card.id }}">{{ card.title }}</h3>
+        <input ng-show="editingTitle" ng-blur="updateCardTitle(card)" type="text" id="new-card-title-{{ card.id }}">
+
         <p>In list {{ list.title }}</p>
         <p><a>Mark Completed</a></p>
+
       </div>
+
       <div class="modal-body">
-        {{ card.description }}
+        <p ng-show="!editingDesc" ng-click="editCardDesc(card.id)" id="card-desc-{{ card.id }}">{{ card.description }}</p>
+        <input type="text" id="new-card-desc-{{ card.id }}" ng-show="editingDesc" ng-blur="updateCardDesc(card)">
       </div>
+
       <div class="modal-body">
         <h4> Members </h4>
         <a> Add Member</a>
       </div>
+
       <div class="modal-body">
         <h4> Activity </h4>
       </div>
+
     </div>
   </div>
 </div>  

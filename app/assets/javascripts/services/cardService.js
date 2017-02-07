@@ -1,6 +1,8 @@
 dj.factory('cardService', ['Restangular', 'boardService', function(Restangular, boardService) {
 
+
   var _boards = boardService.getBoards();
+
 
   var all = function(list) {
     return Restangular.all('cards').customGETLIST('', {
@@ -9,6 +11,7 @@ dj.factory('cardService', ['Restangular', 'boardService', function(Restangular, 
       return cards;
     })
   };
+
 
   var add = function(list, currentBoard) {
 
@@ -36,9 +39,29 @@ dj.factory('cardService', ['Restangular', 'boardService', function(Restangular, 
 
   };
 
+
+  var update = function(card, currentBoard) {
+
+    return Restangular.one('cards').customPUT(card, card.id).then(function(card) {
+
+    for (var i = 0; i < currentBoard.lists.length; i++) {
+      if (currentBoard.lists[i].id === list.id) {
+        currentBoard.lists[i].title = list.title;
+        currentBoard.lists[i].description = list.description;
+      }
+    }
+
+    }, function(response) {
+      console.log(response);
+    });
+
+  };
+
+
   return {
     all: all,
-    add: add
+    add: add,
+    update: update
   };
 
 }]);

@@ -51,22 +51,17 @@ dj.factory('listService',
 
         return Restangular.one('lists').customPUT(list, list.id).then(function(list) {
 
-          for (var i = 0; i < _boards.length; i++) {
-            if (currentBoard.id === _boards[i].id) {
-              if (_boards.lists) {
-                for (var j = 0; j < _boards.lists.length; j++) {
-                  if (_boards[i].lists[j].id === list.id) {
-                    _boards[i].lists[j].title = list.title;
-                    _boards[i].lists[j].description = list.description;
-                  }
-                }
-              }
+          for (var i = 0; i < currentBoard.lists.length; i++) {
+            if (currentBoard.lists[i].id === list.id) {
+              currentBoard.lists[i].title = list.title;
+              currentBoard.lists[i].description = list.description;
             }
           }
 
         }, function(response) {
           console.log(response);
-        })
+        });
+        
       };
 
       return {

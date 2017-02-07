@@ -5,6 +5,7 @@ dj.directive('cardModal', function() {
     restrict: 'E',
     scope: {
       card: '=',
+      list: '=',
       updateCard: '&'
     }
   };
