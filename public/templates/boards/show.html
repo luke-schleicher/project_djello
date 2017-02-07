@@ -1,10 +1,7 @@
 <div class="row">
   <div class="col-sm-9">
     <h1 id="board-title" ng-show="!editingTitle" ng-click="editTitle()">{{ currentBoard.title }}</h1>
-    <form class="form-inline" ng-show="editingTitle">
-      <input type="text" class="form-control" id="new-title" placeholder="Enter new title...">
-      <input type="submit" ng-click="updateTitle()" class="btn" value="Update Title">
-    </form>
+    <input ng-show="editingTitle" type="text" class="form-control" id="new-title" placeholder="Enter new title..." ng-blur="updateTitle()">
   </div>
 
   <div class="col-sm-3">
@@ -14,14 +11,21 @@
 
 <div class="row" ng-controller="ListsIndexCtrl">
   
-  <div class="col-sm-3" ng-repeat="list in currentBoard.lists">
+  <div class="col-sm-4" ng-repeat="list in currentBoard.lists">
     <div class="panel panel-default">
-      <div class="panel-heading">{{ list.title }}</div>
+      <div class="panel-heading">
+
+        <h3 ng-show="!editingTitle[list.id]" ng-click="editListTitle(list.id)" id="list-title-{{ list.id }}">{{ list.title }}</h3>
+        <input ng-show="editingTitle[list.id]" type="text" id="new-list-title-{{ list.id }}" ng-blur="updateTitle(list)">
+
+        <p ng-show="!editingDesc[list.id]" ng-click="editListDesc(list.id)" id="list-desc-{{ list.id }}">{{ list.description }}</p>
+        <input ng-show="editingDesc[list.id]" type="text" id="new-list-desc-{{ list.id }}" ng-blur="updateListDesc(list)">
+
+      </div>
       <div class="panel-body">
-        {{ list.description }}
+        <p><a ng-click="addCard()">Add a Card</a></p>
       </div>
       <div class="panel-footer">
-        <p><a ng-click="addCard()">Add a Card</a></p>
         <p><a ng-click="deleteList(list)">Delete List</a></p>
       </div>
 

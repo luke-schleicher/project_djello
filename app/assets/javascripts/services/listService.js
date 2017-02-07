@@ -32,23 +32,46 @@ dj.factory('listService',
       var deleteList = function(list) {
 
         return list.remove().then(function(response) {
-        for (var i = 0; i < _boards.length; i++) {
-          if (_currentBoard.id === _boards[i].id) {
-            for (var j = 0; j < _boards[i].lists.length; j++) {
-              if (list.id === _boards[i].lists[j].id) {
-                _boards[i].lists.splice(j, 1);
-                return list;
+          for (var i = 0; i < _boards.length; i++) {
+            if (_currentBoard.id === _boards[i].id) {
+              for (var j = 0; j < _boards[i].lists.length; j++) {
+                if (list.id === _boards[i].lists[j].id) {
+                  _boards[i].lists.splice(j, 1);
+                  return list;
+                }
               }
             }
           }
-        }
-        })
+        });
+      };
 
+      var update = function(list) {
+        debugger;
+        return list.put().then(function(list) {
+
+          for (var i = 0; i < _currentBoard.lists.length; i++) {
+            if (_currentBoard.lists[i].id === list.id) {
+              _currentBoard.lists[i].title = list.title;
+            }
+          }
+
+          for (var i = 0; i < _boards.length; i++) {
+            if (_currentBoard.id === _boards[i].id) {
+              for (var j = 0; j < _boards.lists.length; j++) {
+                if (_boards[i].lists[j].id === list.id) {
+                  _boards[i].lists[j].title = list.title;
+                }
+              }
+            }
+          }
+
+        })
       };
 
       return {
         addList: addList,
-        deleteList: deleteList
+        deleteList: deleteList,
+        update: update
       };
     }
   ]

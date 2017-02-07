@@ -36,11 +36,13 @@ dj.controller('BoardsShowCtrl',
 
       $scope.updateTitle = function() {
         var title = angular.element('#new-title').val();
-        $scope.currentBoard.title = title
-        boardService.update($scope.currentBoard).then(function(board) {
-          $scope.currentBoard = board;
-          $scope.editingTitle = false;
-        })
+        if (title.length) {
+          $scope.currentBoard.title = title;
+          boardService.update($scope.currentBoard).then(function(board) {
+            $scope.currentBoard = board;
+          });
+        }
+        $scope.editingTitle = false;
       };
 
 

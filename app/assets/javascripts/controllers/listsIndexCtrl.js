@@ -6,8 +6,10 @@ dj.controller('ListsIndexCtrl',
       $scope.boards = boardService.getBoards();
       $scope.currentBoard = boardService.getCurrentBoard();
 
+      $scope.editingTitle = {};
+      $scope.editingDesc = {};
+
       $scope.addList = function() {
-        console.log('running');
         listService.addList().then(function(list) {
           if ($scope.currentBoard.lists) {
             $scope.currentBoard.lists.push(list);
@@ -16,6 +18,33 @@ dj.controller('ListsIndexCtrl',
             console.log($scope.currentBoard)
           }
         });
+      };
+
+      $scope.editListTitle = function(id) {
+        $scope.editingTitle[id] = true;
+        setTimeout(function(){
+          document.getElementById('new-list-title-' + id).focus();
+        }, 0);
+      };
+
+      $scope.updateTitle = function(list) {
+        var title = angular.element('#new-list-title-' + list.id).val();
+          if (title.length) {
+            list.title = title;
+            listService.update(list);
+          }
+        $scope.editingTitle = {};
+      };
+
+      $scope.editListDesc = function(id) {
+        $scope.editingDesc[id] = true;
+        setTimeout(function() {
+          document.getElementById('new-list-desc-' + id).focus();
+        }, 0);
+      };
+
+      $scope.updateListDesc = function(list) {
+        $scope.editingDesc = {};
       };
 
       $scope.deleteList = function(list) {

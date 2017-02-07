@@ -5,4 +5,6 @@ class Board < ApplicationRecord
 
   has_many :lists, dependent: :destroy
 
+  validates :title, length: { minimum: 1 }
+
 end
