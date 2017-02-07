@@ -10,12 +10,12 @@
   </div>
 </div>
 
-<div class="row">
+<div class="row" ng-controller="ListsIndexCtrl">
   
   <div class="col-sm-3" ng-repeat="list in currentBoard.lists">
     <div class="panel panel-default">
-      <div class="panel-heading" ng-click="editListField({{ list.id }})" id="list-title-{{ list.id }}">{{ list.title }}</div>
-      <div class="panel-body" ng-click="editListField({{ list.id }})" id="list-description-{{ list.id}}">
+      <div class="panel-heading">{{ list.title }}</div>
+      <div class="panel-body">
         {{ list.description }}
       </div>
       <div class="panel-footer">
