@@ -9,13 +9,7 @@ dj.controller('ListsIndexCtrl',
       $scope.editingDesc = {};
 
       $scope.addList = function() {
-        listService.addList($scope.currentBoard).then(function(list) {
-          // if ($scope.currentBoard.lists) {
-          //   $scope.currentBoard.lists.push(list);
-          // } else {
-          //   $scope.currentBoard.lists = [list];
-          // }
-        });
+        listService.addList($scope.currentBoard);
       };
 
       $scope.editListTitle = function(id) {

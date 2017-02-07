@@ -1,0 +1,24 @@
+<div class="modal fade" id="card-modal-{{ card.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h3 class="modal-title" id="exampleModalLabel">{{ card.title }}</h3>
+        <p>In list {{ list.title }}</p>
+        <p><a>Mark Completed</a></p>
+      </div>
+      <div class="modal-body">
+        {{ card.description }}
+      </div>
+      <div class="modal-body">
+        <h4> Members </h4>
+        <a> Add Member</a>
+      </div>
+      <div class="modal-body">
+        <h4> Activity </h4>
+      </div>
+    </div>
+  </div>
+</div>  

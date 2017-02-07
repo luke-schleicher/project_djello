@@ -73,3 +73,10 @@ States
     - description (editable)
     - members (view, dropdown)
     - activity
+
+
+TODO
+Refactor to make controllers skinnier
+Refactor to remove excessive looping logic in services
+Refactor show.html into templates and/or directives
+Bootstrap modal

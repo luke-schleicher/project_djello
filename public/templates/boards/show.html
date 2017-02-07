@@ -24,12 +24,14 @@
       </div>
       <div class="panel-body" ng-controller="CardsIndexCtrl">
 
-        <div ng-repeat="card in list.cards track by $index">
-          <h4>{{ card.title }}</h4>
-          <p>{{ card.description }}</p>
+        <div ng-repeat="card in list.cards" draggable="true">
+          <h4 ng-click="editCard(card)">{{ card.title }}</h4>
+          <p ng-click="editCard(card)">{{ card.description }}</p>
+          <card-modal card="card" update-card="updateCard"></card-modal>
         </div>
 
         <p><a ng-click="addCard(list)">Add a Card</a></p>
+
       </div>
       <div class="panel-footer">
         <p><a ng-click="deleteList(list)">Delete List</a></p>
@@ -38,9 +40,12 @@
     </div>
   </div>
 
-
   <div class="col-sm-3">
     <a ng-click="addList()">Add a List</a>
   </div>
 
 </div>
+
+
+
+
