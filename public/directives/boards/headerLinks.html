@@ -1,10 +1,8 @@
 <label>Select Board:
-  <select ng-change="chooseBoard({ board: chosenBoard.id })" ng-model="chosenBoard.id">
+  <select ng-change="chooseBoard({ board: chosenBoard.id })" ng-model="chosenBoard.id" class="form-control">
     <option ng-repeat="board in boards" value="{{ board.id }}">{{ board.title }}</option>
   </select>
 </label>
-
-{{ chosenBoard }}
 
 <div>
   <a ng-click="deleteBoard()" ng-if="currentBoard.id">Delete Board</a>

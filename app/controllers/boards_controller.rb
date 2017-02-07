@@ -1,5 +1,7 @@
 class BoardsController < ApplicationController
 
+  before_action :authenticate_user!
+
   def index
     @boards = current_user.boards
     respond_to do |format|
@@ -10,14 +12,7 @@ class BoardsController < ApplicationController
   def show
     @board = Board.find_by(id: params[:id])
     respond_to do |format|
-      format.json { render json: @board }
-      #   .to_json(
-      #   include: {
-      #     lists: {
-      #       include: :cards
-      #     }
-      #   }
-      # ) }
+      format.json { render json: @board.to_json(include: :lists) }
     end
   end
 
@@ -38,7 +33,7 @@ class BoardsController < ApplicationController
     @board = Board.find_by(id: params[:id])
     if @board.update(whitelist_update)
       respond_to do |format|
-        format.json { render json: @board }
+        format.json { render json: @board.to_json(include: :lists) }
       end
     else
       respond_to do |format|

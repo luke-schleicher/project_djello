@@ -23,7 +23,6 @@ Lists
   - title
   - description
   - board id
-  - card priority: '3, 2, 15'?
 
 Cards
 - model
