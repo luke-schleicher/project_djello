@@ -30,8 +30,8 @@ dj.factory('listService',
       };
 
       var deleteList = function(list) {
+        return Restangular.one('lists', list.id).remove().then(function(response) {
 
-        return list.remove().then(function(response) {
           for (var i = 0; i < _boards.length; i++) {
             if (_currentBoard.id === _boards[i].id) {
               for (var j = 0; j < _boards[i].lists.length; j++) {
@@ -42,6 +42,7 @@ dj.factory('listService',
               }
             }
           }
+          
         });
       };
 
